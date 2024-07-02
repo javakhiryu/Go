@@ -1,3 +1,3 @@
-module hello
+module iteration
 
 go 1.22.3
