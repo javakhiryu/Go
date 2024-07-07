@@ -52,8 +52,9 @@ func main() {
 	// Print the data for demonstration
 	for _, response := range responses {
 		if strings.Contains(response.Title, joinedArgs) || strings.Contains(response.Transcript, joinedArgs) {
-			fmt.Printf("URL: %s%d%s\nDate: %s-%s-%s\nTitle: %s", URL, response.Num, targetFile, response.Day, response.Month, response.Year, response.Title)
-			break
+			fmt.Printf("URL: %s%d%s\nDate: %s-%s-%s\nTitle: %s\n", URL, response.Num, targetFile, response.Day, response.Month, response.Year, response.Title)
+		} else {
+			fmt.Println("Comics not found")
 		}
 	}
 }
