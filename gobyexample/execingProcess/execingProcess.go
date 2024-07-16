@@ -6,10 +6,10 @@ import (
 	"syscall"
 )
 
-func main(){
+func main() {
 	// Ищем полный путь к бинарному файлу 'ls' в системном пути.
 	binary, lookErr := exec.LookPath("ls")
-	if lookErr !=nil{
+	if lookErr != nil {
 		panic(lookErr)
 	}
 
@@ -19,11 +19,11 @@ func main(){
 
 	// Получаем текущие переменные окружения.
 	//Функция os.Environ возвращает копию списка переменных окружения текущего процесса в формате []string.
-	env :=os.Environ()
+	env := os.Environ()
 
 	// Выполняем команду 'ls' с использованием системного вызова Exec.
 	//Функция syscall.Exec заменяет текущий процесс новым процессом, выполняющим указанную команду. В данном случае это ls с аргументами -a -l -h. Если выполнение завершается с ошибкой, программа завершится с паникой.
-	execErr :=syscall.Exec(binary, args, env)
+	execErr := syscall.Exec(binary, args, env)
 	if execErr != nil {
 		panic(execErr)
 	}
@@ -39,24 +39,25 @@ func main(){
 //Альтернативы для Windows
 //Для выполнения внешних команд на Windows, можно использовать exec.Command и связанные методы, которые предоставляют аналогичный функционал, хотя и с некоторыми отличиями. Например:
 
-package main
-
-import (
-    "fmt"
-    "os/exec"
-)
-
-func main() {
-
-    // Создание команды 'dir' (аналог 'ls' на Windows).
-    cmd := exec.Command("cmd", "/C", "dir")
-
-    // Выполнение команды и получение вывода.
-    output, err := cmd.Output()
-    if err != nil {
-        panic(err)
-    }
-
-    // Печать вывода команды.
-    fmt.Println(string(output))
-}
+//package main
+//
+//import (
+//    "fmt"
+//    "os/exec"
+//)
+//
+//func main() {
+//
+//    // Создание команды 'dir' (аналог 'ls' на Windows).
+//    cmd := exec.Command("cmd", "/C", "dir")
+//
+//    // Выполнение команды и получение вывода.
+//    output, err := cmd.Output()
+//    if err != nil {
+//        panic(err)
+//    }
+//
+//    // Печать вывода команды.
+//    fmt.Println(string(output))
+//}
+//

@@ -18,7 +18,7 @@ func main() {
 	fmt.Println("Args with program name: ", argsWithProg) // Выводим все аргументы, включая имя программы
 	fmt.Println("Args without progrma name: ", argsWithoutProg) // Выводим все аргументы, кроме имени программы
 	fmt.Println("4th argument: ", arg) // Выводим четвертый аргумент
-
+}
 //go run main.go arg1 arg2 arg3 arg4 arg5
 
 //Args with program name:  [main.go arg1 arg2 arg3 arg4 arg5]
