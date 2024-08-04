@@ -16,6 +16,7 @@ func dirTree(out io.Writer, path string, printFiles bool) error {
 		if err != nil {
 			return err
 		}
+
 		// Сортировка элементов по имени
 		sort.Slice(entries, func(i, j int) bool {
 			return entries[i].Name() < entries[j].Name()
@@ -34,6 +35,7 @@ func dirTree(out io.Writer, path string, printFiles bool) error {
 			} else if !last && i == len(entries)-1 {
 				prefix = "└───"
 			}
+
 			// Получение информации о файле
 			info, err := entry.Info()
 			if err != nil {
@@ -54,11 +56,11 @@ func dirTree(out io.Writer, path string, printFiles bool) error {
 
 			// Рекурсивный вызов для подкаталогов
 			if entry.IsDir() {
-				newIndent := indent + "│\t"
-				if last && i == len(entries)-1 {
-					newIndent = indent + "\t"
-				} else if !last && i == len(entries)-1 {
-					newIndent = indent + "\t"
+				newIndent := indent
+				if i != len(entries)-1 {
+					newIndent += "│   "
+				} else {
+					newIndent += "    "
 				}
 				err := printDirTree(filepath.Join(currentPath, entry.Name()), newIndent, i == len(entries)-1)
 				if err != nil {
@@ -68,6 +70,7 @@ func dirTree(out io.Writer, path string, printFiles bool) error {
 		}
 		return nil
 	}
+
 	// Начать печать с указанного пути
 	return printDirTree(path, "", false)
 }
@@ -84,3 +87,10 @@ func main() {
 		panic(err.Error())
 	}
 }
+
+//├───static
+//│       ├───a_lorem
+//│       │       ├───dolor.txt (empty)
+//│       │       ├───gopher.png (70372b)
+//│       │       └───ipsum
+//│       │               └───gopher.png (70372b)
